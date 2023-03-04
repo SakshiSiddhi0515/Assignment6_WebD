@@ -1,0 +1,62 @@
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>Stop Watch</title>
+    <link rel="shortcut icon" type="image/png" href="calculator-icon-back-school-vector-illustration_444196-1345.avif"></link>
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.10.2/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>  
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <label id="timeLabel">00:00:00</label>
+    <button id="startBtn">Start</button>
+    <button id="stopBtn">Stop</button>
+    <button id="resetBtn">Reset</button>
+</body>
+<script>
+    let hours = 0, minutes = 0, seconds = 0; // Initialize variables to hold time
+let timeInterval; // To hold the interval ID
+const timeLabel = document.getElementById("timeLabel");
+
+// Start button click event handler
+document.getElementById("startBtn").addEventListener("click", () => {
+  // Start the timer by calling setInterval function
+  timeInterval = setInterval(() => {
+    // Update the time variables
+    seconds++;
+    if (seconds == 60) {
+      seconds = 0;
+      minutes++;
+    }
+    if (minutes == 60) {
+      minutes = 0;
+      hours++;
+    }
+
+    // Update the time display
+    timeLabel.textContent = `${hours.toString().padStart(2, '0')}:${minutes.toString().padStart(2, '0')}:${seconds.toString().padStart(2, '0')}`;
+  }, 1000); // 1 second interval
+});
+
+// Stop button click event handler
+document.getElementById("stopBtn").addEventListener("click", () => {
+  // Stop the timer by calling clearInterval function
+  clearInterval(timeInterval);
+});
+
+// Reset button click event handler
+document.getElementById("resetBtn").addEventListener("click", () => {
+  // Reset the time variables and update the time display
+  hours = 0;
+  minutes = 0;
+  seconds = 0;
+  timeLabel.textContent = "00:00:00";
+
+  // Stop the timer by calling clearInterval function
+  clearInterval(timeInterval);
+});
+</script>
+</html>
